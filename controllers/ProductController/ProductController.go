@@ -1,9 +1,17 @@
 package productcontroller
 
-import "github.com/gin-gonic/gin"
+import (
+	"net/http"
+
+	"github.com/KarMint26/gin-restapi/models"
+	"github.com/gin-gonic/gin"
+)
 
 func Index(c *gin.Context) {
+	var products []models.Product
 
+	models.DB.Find(&products)
+	c.JSON(http.StatusOK, gin.H{"products": products})
 }
 
 func Show(c *gin.Context) {
